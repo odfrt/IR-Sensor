@@ -1,0 +1,192 @@
+\doxysection{IRSensor Class Reference}
+\hypertarget{classIRSensor}{}\label{classIRSensor}\index{IRSensor@{IRSensor}}
+
+
+Classe para leitura e interpretação de valores do sensor IR.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classIRSensor_ad19de6294d36ec9ec3ee0f6154e70838}{IRSensor}} (const string \&adc\+Path)
+\begin{DoxyCompactList}\small\item\em Construtor da classe \doxylink{classIRSensor}{IRSensor}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classIRSensor_aced2f92e5001619c7859319ab485f014}{read\+ADC}} ()
+\begin{DoxyCompactList}\small\item\em Lê o valor do ADC a partir do arquivo. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classIRSensor_a3403315ec3be96973cd430dcf49ff248}{detect\+Obstacle}} ()
+\begin{DoxyCompactList}\small\item\em Executa a detecção contínua de obstáculos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}{path}}
+\begin{DoxyCompactList}\small\item\em Caminho do arquivo a ser lido. \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{classIRSensor_a74ed64ecc46b7937bd66325a3e06b13e}{ADCThreshold}} = 60000
+\begin{DoxyCompactList}\small\item\em Limiar do ADC para detecção de obstáculos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe para leitura e interpretação de valores do sensor IR. 
+
+Esta classe acessa o valor de saída do sensor e determina se há obstáculos com base em um limiar predefinido. 
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00014}{14}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classIRSensor_ad19de6294d36ec9ec3ee0f6154e70838}\label{classIRSensor_ad19de6294d36ec9ec3ee0f6154e70838} 
+\index{IRSensor@{IRSensor}!IRSensor@{IRSensor}}
+\index{IRSensor@{IRSensor}!IRSensor@{IRSensor}}
+\doxysubsubsection{\texorpdfstring{IRSensor()}{IRSensor()}}
+{\footnotesize\ttfamily IRSensor\+::\+IRSensor (\begin{DoxyParamCaption}\item[{const string \&}]{adc\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construtor da classe \doxylink{classIRSensor}{IRSensor}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em adc\+Path} & Caminho do arquivo que fornece a leitura do ADC. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00033}{33}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}{path}}\ =\ adcPath;}
+\DoxyCodeLine{00035\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classIRSensor_a3403315ec3be96973cd430dcf49ff248}\label{classIRSensor_a3403315ec3be96973cd430dcf49ff248} 
+\index{IRSensor@{IRSensor}!detectObstacle@{detectObstacle}}
+\index{detectObstacle@{detectObstacle}!IRSensor@{IRSensor}}
+\doxysubsubsection{\texorpdfstring{detectObstacle()}{detectObstacle()}}
+{\footnotesize\ttfamily void IRSensor\+::detect\+Obstacle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Executa a detecção contínua de obstáculos. 
+
+Realiza um loop, lendo o ADC e utilizando o limiar definido para identificar se há ou não obstáculo. 
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00053}{53}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ value\ =\ \mbox{\hyperlink{classIRSensor_aced2f92e5001619c7859319ab485f014}{readADC}}();}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nErro\ na\ leitura\ do\ sensor!"{}}\ <<\ endl;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sleep(1);}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ obstacle\ =\ (value\ <=\ \mbox{\hyperlink{classIRSensor_a74ed64ecc46b7937bd66325a3e06b13e}{ADCThreshold}});}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (obstacle)\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nHá\ obstáculo!"{}}\ <<\ endl;}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nNão\ há\ obstáculo!"{}}\ <<\ endl;}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Saída\ do\ sensor:\ "{}}\ <<\ value\ <<\ endl;}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ sleep(1);}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00072\ \ \ \ \ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classIRSensor_a3403315ec3be96973cd430dcf49ff248_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{classIRSensor_a3403315ec3be96973cd430dcf49ff248_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classIRSensor_aced2f92e5001619c7859319ab485f014}\label{classIRSensor_aced2f92e5001619c7859319ab485f014} 
+\index{IRSensor@{IRSensor}!readADC@{readADC}}
+\index{readADC@{readADC}!IRSensor@{IRSensor}}
+\doxysubsubsection{\texorpdfstring{readADC()}{readADC()}}
+{\footnotesize\ttfamily int IRSensor\+::read\+ADC (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Lê o valor do ADC a partir do arquivo. 
+
+\begin{DoxyReturn}{Returns}
+Valor inteiro lido do ADC ou -\/1 em caso de erro. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00040}{40}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ ifstream\ file(\mbox{\hyperlink{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}{path}});}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!file)\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ value;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ file\ >>\ value;}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classIRSensor_aced2f92e5001619c7859319ab485f014_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classIRSensor_a74ed64ecc46b7937bd66325a3e06b13e}\label{classIRSensor_a74ed64ecc46b7937bd66325a3e06b13e} 
+\index{IRSensor@{IRSensor}!ADCThreshold@{ADCThreshold}}
+\index{ADCThreshold@{ADCThreshold}!IRSensor@{IRSensor}}
+\doxysubsubsection{\texorpdfstring{ADCThreshold}{ADCThreshold}}
+{\footnotesize\ttfamily const int IRSensor\+::\+ADCThreshold = 60000\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Limiar do ADC para detecção de obstáculos. 
+
+O arquivo lido retorna o valor 65535 para indicar a voltagem 3.\+3V (sem obstáculo) e valores baixos (em torno de 3000) caso contrário. Para levar em conta flutuações, é adotado o limiar de 60000, garantindo uma margem de erro grande. 
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00026}{26}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}\label{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7} 
+\index{IRSensor@{IRSensor}!path@{path}}
+\index{path@{path}!IRSensor@{IRSensor}}
+\doxysubsubsection{\texorpdfstring{path}{path}}
+{\footnotesize\ttfamily string IRSensor\+::path\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Caminho do arquivo a ser lido. 
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00019}{19}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{main_8cpp}{main.\+cpp}}\end{DoxyCompactItemize}

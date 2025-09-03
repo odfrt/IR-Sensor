@@ -76,4 +76,4 @@ int main() {
     IRSensor ir_sensor ("/sys/bus/iio/devices/iio:device0/in_voltage13_raw");
     ir_sensor.detectObstacle();
     return 0;
-};
+}

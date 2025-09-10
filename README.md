@@ -38,3 +38,5 @@ Agora, o executável estará localizado no diretório root da placa. Caso não p
 ### Execução
 
 Conecte o sensor à placa (Atente-se aos jumpers, não faça a conexão de forma errada!) e execute o programa. Se tudo ocorrer de forma correta, o terminal deverá mostrar o seguinte:
+
+<img width="379" height="364" alt="Image" src="https://github.com/user-attachments/assets/8f3a4205-c5c7-4957-babe-96eca8f7d4d3" />

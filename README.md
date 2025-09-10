@@ -1,5 +1,5 @@
 # IR-Sensor
-Software para a detecção de obstáculos utilizando um sensor Infravermelho de reflexão ligado ao kit de desenvolvimento STM32MP1-DK1, baseado no processador STM32MP1.
+Software para a detecção de obstáculos utilizando um sensor Infravermelho de reflexão ligado ao kit de desenvolvimento **STM32MP1-DK1**, baseado no processador STM32MP1.
 
 ## Instruções de uso
 

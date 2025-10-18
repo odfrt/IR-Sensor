@@ -33,10 +33,10 @@ O segundo método permite também a transferência de arquivos via SCP. Para iss
 scp -O IRSensor root@192.168.42.2:/
 ```
 
-Agora, o executável estará localizado no diretório root da placa. Caso não possua permissão para executar o programa, digite `chmod +x IRSensor` no terminal da placa.
+Agora, o executável estará localizado no diretório root da placa. 
 
 ### Execução
 
-Conecte o sensor à placa (Atente-se aos jumpers, não faça a conexão de forma errada!) e execute o programa. Se tudo ocorrer de forma correta, o terminal deverá mostrar o seguinte:
+Conecte o sensor à placa (Atente-se aos jumpers, não faça a conexão de forma errada!) e execute o programa digitando ``./IRSensor`` no terminal da placa. Caso não possua permissão para executar o programa, digite `chmod +x IRSensor`. Se tudo ocorrer de forma correta, o terminal deverá mostrar o seguinte:
 
 <img width="379" height="364" alt="Image" src="https://github.com/user-attachments/assets/8f3a4205-c5c7-4957-babe-96eca8f7d4d3" />

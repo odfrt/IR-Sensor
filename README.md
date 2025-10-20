@@ -51,7 +51,7 @@ ou, no Terminal, digite:
 ```
 nc -u -l <Porta>
 ```
-Caso o IP e a porta estiverem corretos, os dados do sensor aparecerão, em tempo real, no seu computador, como pode ser visto a seguir:
+Caso o IP e a porta estejam corretos, os dados do sensor aparecerão, em tempo real, no seu computador, como pode ser visto a seguir:
 
 <img width="921" height="700" alt="transf dados" src="https://github.com/user-attachments/assets/f141b3eb-a86a-4a8e-a048-75747535ca85" />
 

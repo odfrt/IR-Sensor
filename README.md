@@ -21,8 +21,7 @@ arm-buildroot-linux-gnueabihf_sdk-buildroot/bin/arm-buildroot-linux-gnueabihf-g+
 
 Com o executável compilado, podemos prosseguir para o uso da placa. Primeiramente, é necessário conectá-la à alimentação via cabo USB-C. 
 
-A conexão com a placa poderá ser feita de duas formas. A primeira das duas é utilizando um cabo micro-USB conectado à porta serial da placa. Conecte o cabo ao seu computador e utilize o software _TeraTerm_ para acessar o terminal da placa.
-
+A conexão com a placa poderá ser feita de duas formas. A primeira das duas é utilizando um cabo micro-USB conectado à porta serial da placa. Conecte o cabo ao seu computador e utilize o software <a href="https://teratermproject.github.io/index-en.html"> _TeraTerm_</a> para acessar o terminal da placa.
 A segunda forma é via conexão wireless. Primeiro, conecte a placa ao seu roteador via cabo ethernet. Conecte seu computador ao Wi-Fi e configure um endereço IPV4 estático na mesma faixa da placa (192.168.42.xx.}
 Feito isso, abra o seu terminal ou Powershell e execute o comando `ssh root@<ip da placa>` e digite a senha. Agora, você tem acesso ao terminal da placa de maneira remota.
 

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['irsensor_0',['IRSensor',['../classIRSensor.html#ad19de6294d36ec9ec3ee0f6154e70838',1,'IRSensor']]]
+  ['irsensor_0',['IRSensor',['../classIRSensor.html#a906d740d1614d19cf924314f5ddad6fa',1,'IRSensor']]]
 ];

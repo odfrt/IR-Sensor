@@ -8,10 +8,14 @@ Classe para leitura e interpretação de valores do sensor IR.
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classIRSensor_ad19de6294d36ec9ec3ee0f6154e70838}{IRSensor}} (const string \&adc\+Path)
+\mbox{\hyperlink{classIRSensor_a906d740d1614d19cf924314f5ddad6fa}{IRSensor}} (const string \&adc\+Path, const string \&server\+IP, int server\+Port)
 \begin{DoxyCompactList}\small\item\em Construtor da classe \doxylink{classIRSensor}{IRSensor}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classIRSensor_a148ff48b9276932e24f3e5c2f1c5f51e}{\texorpdfstring{$\sim$}{\string~}\+IRSensor}} ()
+\begin{DoxyCompactList}\small\item\em Destrutor da classe \doxylink{classIRSensor}{IRSensor}. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classIRSensor_aced2f92e5001619c7859319ab485f014}{read\+ADC}} ()
 \begin{DoxyCompactList}\small\item\em Lê o valor do ADC a partir do arquivo. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classIRSensor_a7dd2d48a5c545087591129b006042a3e}{send\+Data}} (int adc\+Value, const string \&status)
+\begin{DoxyCompactList}\small\item\em Envia os dados do sensor para o servidor via UDP. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classIRSensor_a3403315ec3be96973cd430dcf49ff248}{detect\+Obstacle}} ()
 \begin{DoxyCompactList}\small\item\em Executa a detecção contínua de obstáculos. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
@@ -20,7 +24,11 @@ void \mbox{\hyperlink{classIRSensor_a3403315ec3be96973cd430dcf49ff248}{detect\+O
 string \mbox{\hyperlink{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}{path}}
 \begin{DoxyCompactList}\small\item\em Caminho do arquivo a ser lido. \end{DoxyCompactList}\item 
 const int \mbox{\hyperlink{classIRSensor_a74ed64ecc46b7937bd66325a3e06b13e}{ADCThreshold}} = 60000
-\begin{DoxyCompactList}\small\item\em Limiar do ADC para detecção de obstáculos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Limiar do ADC para detecção de obstáculos. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classIRSensor_aca10c6f87bfef5ef17f7c4d34f44ed20}{sockfd}}
+\begin{DoxyCompactList}\small\item\em Socket UDP para envio de dados. \end{DoxyCompactList}\item 
+struct sockaddr\+\_\+in \mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{dest\+\_\+addr}}
+\begin{DoxyCompactList}\small\item\em Estrutura do endereço do servidor destino. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -28,16 +36,16 @@ Classe para leitura e interpretação de valores do sensor IR.
 
 Esta classe acessa o valor de saída do sensor e determina se há obstáculos com base em um limiar predefinido. 
 
-Definition at line \mbox{\hyperlink{main_8cpp_source_l00014}{14}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00016}{16}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classIRSensor_ad19de6294d36ec9ec3ee0f6154e70838}\label{classIRSensor_ad19de6294d36ec9ec3ee0f6154e70838} 
+\Hypertarget{classIRSensor_a906d740d1614d19cf924314f5ddad6fa}\label{classIRSensor_a906d740d1614d19cf924314f5ddad6fa} 
 \index{IRSensor@{IRSensor}!IRSensor@{IRSensor}}
 \index{IRSensor@{IRSensor}!IRSensor@{IRSensor}}
 \doxysubsubsection{\texorpdfstring{IRSensor()}{IRSensor()}}
-{\footnotesize\ttfamily IRSensor\+::\+IRSensor (\begin{DoxyParamCaption}\item[{const string \&}]{adc\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily IRSensor\+::\+IRSensor (\begin{DoxyParamCaption}\item[{const string \&}]{adc\+Path,  }\item[{const string \&}]{server\+IP,  }\item[{int}]{server\+Port }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -47,16 +55,55 @@ Construtor da classe \doxylink{classIRSensor}{IRSensor}.
 \begin{DoxyParams}{Parameters}
 {\em adc\+Path} & Caminho do arquivo que fornece a leitura do ADC. \\
 \hline
+{\em server\+IP} & Endereço IP do servidor UDP. \\
+\hline
+{\em server\+Port} & Porta do servidor UDP. \\
+\hline
 \end{DoxyParams}
 
 
-Definition at line \mbox{\hyperlink{main_8cpp_source_l00033}{33}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00041}{41}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}{path}}\ =\ adcPath;}
-\DoxyCodeLine{00035\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}{path}}\ =\ adcPath;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classIRSensor_aca10c6f87bfef5ef17f7c4d34f44ed20}{sockfd}}\ =\ socket(AF\_INET,\ SOCK\_DGRAM,\ 0);}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classIRSensor_aca10c6f87bfef5ef17f7c4d34f44ed20}{sockfd}}\ <\ 0)\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ perror(\textcolor{stringliteral}{"{}ERRO\ NO\ SOCKET"{}});}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ memset(\&\mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{dest\_addr}},\ 0,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{dest\_addr}}));}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{dest\_addr}}.sin\_family\ =\ AF\_INET;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{dest\_addr}}.sin\_port\ =\ htons(serverPort);}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inet\_pton(AF\_INET,\ serverIP.c\_str(),\ \&\mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{dest\_addr}}.sin\_addr)\ <=\ 0)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}IP\ INVALIDO"{}}\ <<\ endl;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00057\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{classIRSensor_a148ff48b9276932e24f3e5c2f1c5f51e}\label{classIRSensor_a148ff48b9276932e24f3e5c2f1c5f51e} 
+\index{IRSensor@{IRSensor}!````~IRSensor@{\texorpdfstring{$\sim$}{\string~}IRSensor}}
+\index{````~IRSensor@{\texorpdfstring{$\sim$}{\string~}IRSensor}!IRSensor@{IRSensor}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IRSensor()}{\string~IRSensor()}}
+{\footnotesize\ttfamily IRSensor\+::\texorpdfstring{$\sim$}{\string~}\+IRSensor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destrutor da classe \doxylink{classIRSensor}{IRSensor}. 
+
+Fecha o socket. 
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00063}{63}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ close(\mbox{\hyperlink{classIRSensor_aca10c6f87bfef5ef17f7c4d34f44ed20}{sockfd}});}
+\DoxyCodeLine{00065\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
@@ -74,30 +121,29 @@ Executa a detecção contínua de obstáculos.
 
 Realiza um loop, lendo o ADC e utilizando o limiar definido para identificar se há ou não obstáculo. 
 
-Definition at line \mbox{\hyperlink{main_8cpp_source_l00053}{53}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00097}{97}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ value\ =\ \mbox{\hyperlink{classIRSensor_aced2f92e5001619c7859319ab485f014}{readADC}}();}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ ==\ -\/1)\ \{}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nErro\ na\ leitura\ do\ sensor!"{}}\ <<\ endl;}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sleep(1);}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ obstacle\ =\ (value\ <=\ \mbox{\hyperlink{classIRSensor_a74ed64ecc46b7937bd66325a3e06b13e}{ADCThreshold}});}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (obstacle)\ \{}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nHá\ obstáculo!"{}}\ <<\ endl;}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nNão\ há\ obstáculo!"{}}\ <<\ endl;}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Saída\ do\ sensor:\ "{}}\ <<\ value\ <<\ endl;}
-\DoxyCodeLine{00069\ }
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ sleep(1);}
-\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00072\ \ \ \ \ \}}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ value\ =\ \mbox{\hyperlink{classIRSensor_aced2f92e5001619c7859319ab485f014}{readADC}}();}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nErro\ na\ leitura\ do\ sensor!"{}}\ <<\ endl;}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sleep(1);}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ obstacle\ =\ (value\ <=\ \mbox{\hyperlink{classIRSensor_a74ed64ecc46b7937bd66325a3e06b13e}{ADCThreshold}});}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ status\ =\ obstacle\ ?\ \textcolor{stringliteral}{"{}OBSTRUCTED"{}}\ :\ \textcolor{stringliteral}{"{}CLEAR"{}};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}STATUS:\ "{}}\ <<\ status\ <<\ \textcolor{stringliteral}{"{}\ |\ ADC:\ "{}}\ <<\ value\ <<\ endl;}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classIRSensor_a7dd2d48a5c545087591129b006042a3e}{sendData}}(value,\ status);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ sleep(1);}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00115\ \ \ \ \ \}}
 
 \end{DoxyCode}
 Here is the call graph for this function\+:
@@ -131,19 +177,19 @@ Valor inteiro lido do ADC ou -\/1 em caso de erro.
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{main_8cpp_source_l00040}{40}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00071}{71}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ ifstream\ file(\mbox{\hyperlink{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}{path}});}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!file)\ \{}
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ value;}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ file\ >>\ value;}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
-\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ ifstream\ file(\mbox{\hyperlink{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}{path}});}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!file)\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ value;}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(file\ >>\ value))\ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
 
 \end{DoxyCode}
 Here is the caller graph for this function\+:
@@ -152,6 +198,45 @@ Here is the caller graph for this function\+:
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classIRSensor_aced2f92e5001619c7859319ab485f014_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classIRSensor_a7dd2d48a5c545087591129b006042a3e}\label{classIRSensor_a7dd2d48a5c545087591129b006042a3e} 
+\index{IRSensor@{IRSensor}!sendData@{sendData}}
+\index{sendData@{sendData}!IRSensor@{IRSensor}}
+\doxysubsubsection{\texorpdfstring{sendData()}{sendData()}}
+{\footnotesize\ttfamily void IRSensor\+::send\+Data (\begin{DoxyParamCaption}\item[{int}]{adc\+Value,  }\item[{const string \&}]{status }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Envia os dados do sensor para o servidor via UDP. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em adc\+Value} & Valor lido do ADC. \\
+\hline
+{\em status} & Status do sensor ("{}\+OBSTRUCTED"{} ou "{}\+CLEAR"{}). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00086}{86}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ message\ =\ \textcolor{stringliteral}{"{}\(\backslash\)nADC\ ="{}}\ +\ to\_string(adcValue)\ +\ \textcolor{stringliteral}{"{}\ |\ STATUS\ ="{}}\ +\ status;}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ ssize\_t\ sent\ =\ sendto(\mbox{\hyperlink{classIRSensor_aca10c6f87bfef5ef17f7c4d34f44ed20}{sockfd}},\ message.c\_str(),\ message.size(),\ 0,}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keyword}{struct}\ sockaddr*)\&\mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{dest\_addr}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{dest\_addr}}));}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sent\ <\ 0)\ perror(\textcolor{stringliteral}{"{}ERRO\ NO\ ENVIO"{}});}
+\DoxyCodeLine{00091\ \ \ \ \ \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classIRSensor_a7dd2d48a5c545087591129b006042a3e_icgraph}
 \end{center}
 \end{figure}
 
@@ -169,7 +254,21 @@ Limiar do ADC para detecção de obstáculos.
 
 O arquivo lido retorna o valor 65535 para indicar a voltagem 3.\+3V (sem obstáculo) e valores baixos (em torno de 3000) caso contrário. Para levar em conta flutuações, é adotado o limiar de 60000, garantindo uma margem de erro grande. 
 
-Definition at line \mbox{\hyperlink{main_8cpp_source_l00026}{26}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00028}{28}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}\label{classIRSensor_ac3414c6f917b0fa86089e87e9f055635} 
+\index{IRSensor@{IRSensor}!dest\_addr@{dest\_addr}}
+\index{dest\_addr@{dest\_addr}!IRSensor@{IRSensor}}
+\doxysubsubsection{\texorpdfstring{dest\_addr}{dest\_addr}}
+{\footnotesize\ttfamily struct sockaddr\+\_\+in IRSensor\+::dest\+\_\+addr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Estrutura do endereço do servidor destino. 
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00032}{32}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
 
 \Hypertarget{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}\label{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7} 
 \index{IRSensor@{IRSensor}!path@{path}}
@@ -183,7 +282,21 @@ Caminho do arquivo a ser lido.
 
 
 
-Definition at line \mbox{\hyperlink{main_8cpp_source_l00019}{19}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00021}{21}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{classIRSensor_aca10c6f87bfef5ef17f7c4d34f44ed20}\label{classIRSensor_aca10c6f87bfef5ef17f7c4d34f44ed20} 
+\index{IRSensor@{IRSensor}!sockfd@{sockfd}}
+\index{sockfd@{sockfd}!IRSensor@{IRSensor}}
+\doxysubsubsection{\texorpdfstring{sockfd}{sockfd}}
+{\footnotesize\ttfamily int IRSensor\+::sockfd\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Socket UDP para envio de dados. 
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00030}{30}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
 
 
 

@@ -1,0 +1,9 @@
+<map id="main" name="main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,60,56"/>
+<area shape="rect" id="Node000002" href="$classIRSensor.html#a3403315ec3be96973cd430dcf49ff248" title="Executa a detecção contínua de obstáculos." alt="" coords="108,31,293,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,41,94,41,94,46,60,46"/>
+<area shape="rect" id="Node000003" href="$classIRSensor.html#aced2f92e5001619c7859319ab485f014" title="Lê o valor do ADC a partir do arquivo." alt="" coords="344,5,488,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="293,30,330,25,331,31,294,35"/>
+<area shape="rect" id="Node000004" href="$classIRSensor.html#a7dd2d48a5c545087591129b006042a3e" title="Envia os dados do sensor para o servidor via UDP." alt="" coords="341,55,491,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="294,51,328,55,327,60,293,56"/>
+</map>

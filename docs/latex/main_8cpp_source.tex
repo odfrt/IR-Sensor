@@ -6,53 +6,97 @@
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <fstream>}}
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <string>}}
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00005}00005\ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00006}00006\ \textcolor{keyword}{using\ namespace\ }std;}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00007}00007\ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00014}\mbox{\hyperlink{classIRSensor}{00014}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classIRSensor}{IRSensor}}\ \{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00015}00015\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00019}\mbox{\hyperlink{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}{00019}}\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}{path}};}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00026}\mbox{\hyperlink{classIRSensor_a74ed64ecc46b7937bd66325a3e06b13e}{00026}}\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classIRSensor_a74ed64ecc46b7937bd66325a3e06b13e}{ADCThreshold}}\ =\ 60000;}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00027}00027\ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00028}00028\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00033}\mbox{\hyperlink{classIRSensor_ad19de6294d36ec9ec3ee0f6154e70838}{00033}}\ \ \ \ \ \mbox{\hyperlink{classIRSensor_ad19de6294d36ec9ec3ee0f6154e70838}{IRSensor}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ adcPath)\ \{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}{path}}\ =\ adcPath;}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00035}00035\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00040}\mbox{\hyperlink{classIRSensor_aced2f92e5001619c7859319ab485f014}{00040}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classIRSensor_aced2f92e5001619c7859319ab485f014}{readADC}}()\ \{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00041}00041\ \ \ \ \ \ \ \ \ ifstream\ file(\mbox{\hyperlink{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}{path}});}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!file)\ \{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ value;}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ file\ >>\ value;}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00048}00048\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00053}\mbox{\hyperlink{classIRSensor_a3403315ec3be96973cd430dcf49ff248}{00053}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classIRSensor_a3403315ec3be96973cd430dcf49ff248}{detectObstacle}}()\ \{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ value\ =\ \mbox{\hyperlink{classIRSensor_aced2f92e5001619c7859319ab485f014}{readADC}}();}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ ==\ -\/1)\ \{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nErro\ na\ leitura\ do\ sensor!"{}}\ <<\ endl;}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sleep(1);}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ obstacle\ =\ (value\ <=\ \mbox{\hyperlink{classIRSensor_a74ed64ecc46b7937bd66325a3e06b13e}{ADCThreshold}});}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (obstacle)\ \{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nHá\ obstáculo!"{}}\ <<\ endl;}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nNão\ há\ obstáculo!"{}}\ <<\ endl;}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Saída\ do\ sensor:\ "{}}\ <<\ value\ <<\ endl;}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00069}00069\ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ sleep(1);}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00072}00072\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00073}00073\ \};}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00074}00074\ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00075}\mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{00075}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()\ \{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00076}00076\ \ \ \ \ \mbox{\hyperlink{classIRSensor}{IRSensor}}\ ir\_sensor\ (\textcolor{stringliteral}{"{}/sys/bus/iio/devices/iio:device0/in\_voltage13\_raw"{}});}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00077}00077\ \ \ \ \ ir\_sensor.\mbox{\hyperlink{classIRSensor_a3403315ec3be96973cd430dcf49ff248}{detectObstacle}}();}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00078}00078\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00079}00079\ \};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <arpa/inet.h>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00009}00009\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00016}\mbox{\hyperlink{classIRSensor}{00016}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classIRSensor}{IRSensor}}\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00017}00017\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00021}\mbox{\hyperlink{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}{00021}}\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}{path}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00028}\mbox{\hyperlink{classIRSensor_a74ed64ecc46b7937bd66325a3e06b13e}{00028}}\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classIRSensor_a74ed64ecc46b7937bd66325a3e06b13e}{ADCThreshold}}\ =\ 60000;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00030}\mbox{\hyperlink{classIRSensor_aca10c6f87bfef5ef17f7c4d34f44ed20}{00030}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classIRSensor_aca10c6f87bfef5ef17f7c4d34f44ed20}{sockfd}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00032}\mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{00032}}\ \ \ \ \ \textcolor{keyword}{struct\ }sockaddr\_in\ \mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{dest\_addr}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00034}00034\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00041}\mbox{\hyperlink{classIRSensor_a906d740d1614d19cf924314f5ddad6fa}{00041}}\ \ \ \ \ \mbox{\hyperlink{classIRSensor_a906d740d1614d19cf924314f5ddad6fa}{IRSensor}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ adcPath,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ serverIP,\ \textcolor{keywordtype}{int}\ serverPort)\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}{path}}\ =\ adcPath;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classIRSensor_aca10c6f87bfef5ef17f7c4d34f44ed20}{sockfd}}\ =\ socket(AF\_INET,\ SOCK\_DGRAM,\ 0);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classIRSensor_aca10c6f87bfef5ef17f7c4d34f44ed20}{sockfd}}\ <\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ perror(\textcolor{stringliteral}{"{}ERRO\ NO\ SOCKET"{}});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ memset(\&\mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{dest\_addr}},\ 0,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{dest\_addr}}));}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{dest\_addr}}.sin\_family\ =\ AF\_INET;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{dest\_addr}}.sin\_port\ =\ htons(serverPort);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inet\_pton(AF\_INET,\ serverIP.c\_str(),\ \&\mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{dest\_addr}}.sin\_addr)\ <=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}IP\ INVALIDO"{}}\ <<\ endl;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00063}\mbox{\hyperlink{classIRSensor_a148ff48b9276932e24f3e5c2f1c5f51e}{00063}}\ \ \ \ \ \mbox{\hyperlink{classIRSensor_a148ff48b9276932e24f3e5c2f1c5f51e}{\string~IRSensor}}()\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00064}00064\ \ \ \ \ \ \ \ \ close(\mbox{\hyperlink{classIRSensor_aca10c6f87bfef5ef17f7c4d34f44ed20}{sockfd}});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00065}00065\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00071}\mbox{\hyperlink{classIRSensor_aced2f92e5001619c7859319ab485f014}{00071}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classIRSensor_aced2f92e5001619c7859319ab485f014}{readADC}}()\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ ifstream\ file(\mbox{\hyperlink{classIRSensor_a7a4fc856d0f1d00504bc0c50472a60e7}{path}});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!file)\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ value;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(file\ >>\ value))\ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00079}00079\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00086}\mbox{\hyperlink{classIRSensor_a7dd2d48a5c545087591129b006042a3e}{00086}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classIRSensor_a7dd2d48a5c545087591129b006042a3e}{sendData}}(\textcolor{keywordtype}{int}\ adcValue,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ status)\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ message\ =\ \textcolor{stringliteral}{"{}\(\backslash\)nADC\ ="{}}\ +\ to\_string(adcValue)\ +\ \textcolor{stringliteral}{"{}\ |\ STATUS\ ="{}}\ +\ status;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ ssize\_t\ sent\ =\ sendto(\mbox{\hyperlink{classIRSensor_aca10c6f87bfef5ef17f7c4d34f44ed20}{sockfd}},\ message.c\_str(),\ message.size(),\ 0,}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keyword}{struct}\ sockaddr*)\&\mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{dest\_addr}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classIRSensor_ac3414c6f917b0fa86089e87e9f055635}{dest\_addr}}));}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sent\ <\ 0)\ perror(\textcolor{stringliteral}{"{}ERRO\ NO\ ENVIO"{}});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00091}00091\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00097}\mbox{\hyperlink{classIRSensor_a3403315ec3be96973cd430dcf49ff248}{00097}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classIRSensor_a3403315ec3be96973cd430dcf49ff248}{detectObstacle}}()\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ value\ =\ \mbox{\hyperlink{classIRSensor_aced2f92e5001619c7859319ab485f014}{readADC}}();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nErro\ na\ leitura\ do\ sensor!"{}}\ <<\ endl;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sleep(1);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ obstacle\ =\ (value\ <=\ \mbox{\hyperlink{classIRSensor_a74ed64ecc46b7937bd66325a3e06b13e}{ADCThreshold}});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ status\ =\ obstacle\ ?\ \textcolor{stringliteral}{"{}OBSTRUCTED"{}}\ :\ \textcolor{stringliteral}{"{}CLEAR"{}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}STATUS:\ "{}}\ <<\ status\ <<\ \textcolor{stringliteral}{"{}\ |\ ADC:\ "{}}\ <<\ value\ <<\ endl;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classIRSensor_a7dd2d48a5c545087591129b006042a3e}{sendData}}(value,\ status);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ sleep(1);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00115}00115\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00116}00116\ \};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00118}\mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{00118}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00119}00119\ \ \ \ \ \textcolor{keywordflow}{if}\ (argc\ !=\ 3)\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00120}00120\ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}USO:\ "{}}\ <<\ argv[0]\ <<\ \textcolor{stringliteral}{"{}\ <server\_ip>\ <server\_port>\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00121}00121\ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}EXEMPLO:\ "{}}\ <<\ argv[0]\ <<\ \textcolor{stringliteral}{"{}\ 192.168.42.10\ 5000\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00123}00123\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00125}00125\ \ \ \ \ \textcolor{keywordtype}{string}\ serverIP\ =\ argv[1];}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00126}00126\ \ \ \ \ \textcolor{keywordtype}{int}\ serverPort\ =\ atoi(argv[2]);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00128}00128\ \ \ \ \ \mbox{\hyperlink{classIRSensor}{IRSensor}}\ ir\_sensor\ (\textcolor{stringliteral}{"{}/sys/bus/iio/devices/iio:device0/in\_voltage13\_raw"{}},\ serverIP,\ serverPort);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00130}00130\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}ENVIANDO\ PARA:\ "{}}\ <<\ serverIP\ <<\ \textcolor{stringliteral}{"{}:"{}}\ <<\ serverPort\ <<\ \textcolor{stringliteral}{"{}...\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00132}00132\ \ \ \ \ ir\_sensor.\mbox{\hyperlink{classIRSensor_a3403315ec3be96973cd430dcf49ff248}{detectObstacle}}();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00134}00134\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00135}00135\ \}}
 
 \end{DoxyCode}

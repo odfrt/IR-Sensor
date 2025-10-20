@@ -4,6 +4,9 @@
 {\ttfamily \#include $<$fstream$>$}\newline
 {\ttfamily \#include $<$string$>$}\newline
 {\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
 Include dependency graph for main.\+cpp\+:
 \nopagebreak
 \begin{figure}[H]
@@ -20,28 +23,41 @@ class \mbox{\hyperlink{classIRSensor}{IRSensor}}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+int \mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\Hypertarget{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
 \index{main.cpp@{main.cpp}!main@{main}}
 \index{main@{main}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
 
 
 
-Definition at line \mbox{\hyperlink{main_8cpp_source_l00075}{75}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00118}{118}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{classIRSensor}{IRSensor}}\ ir\_sensor\ (\textcolor{stringliteral}{"{}/sys/bus/iio/devices/iio:device0/in\_voltage13\_raw"{}});}
-\DoxyCodeLine{00077\ \ \ \ \ ir\_sensor.detectObstacle();}
-\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
-\DoxyCodeLine{00079\ \};}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordflow}{if}\ (argc\ !=\ 3)\ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}USO:\ "{}}\ <<\ argv[0]\ <<\ \textcolor{stringliteral}{"{}\ <server\_ip>\ <server\_port>\(\backslash\)n"{}};}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}EXEMPLO:\ "{}}\ <<\ argv[0]\ <<\ \textcolor{stringliteral}{"{}\ 192.168.42.10\ 5000\(\backslash\)n"{}};}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00123\ \ \ \ \ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{string}\ serverIP\ =\ argv[1];}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{int}\ serverPort\ =\ atoi(argv[2]);}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \mbox{\hyperlink{classIRSensor}{IRSensor}}\ ir\_sensor\ (\textcolor{stringliteral}{"{}/sys/bus/iio/devices/iio:device0/in\_voltage13\_raw"{}},\ serverIP,\ serverPort);}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}ENVIANDO\ PARA:\ "{}}\ <<\ serverIP\ <<\ \textcolor{stringliteral}{"{}:"{}}\ <<\ serverPort\ <<\ \textcolor{stringliteral}{"{}...\(\backslash\)n"{}};}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ ir\_sensor.detectObstacle();}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00135\ \}}
 
 \end{DoxyCode}
 Here is the call graph for this function\+:
@@ -49,6 +65,6 @@ Here is the call graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph}
+\includegraphics[width=350pt]{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
 \end{center}
 \end{figure}

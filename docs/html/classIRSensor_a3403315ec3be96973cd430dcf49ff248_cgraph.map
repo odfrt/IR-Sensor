@@ -1,5 +1,7 @@
 <map id="IRSensor::detectObstacle" name="IRSensor::detectObstacle">
-<area shape="rect" id="Node000001" title="Executa a detecção contínua de obstáculos." alt="" coords="5,5,191,31"/>
-<area shape="rect" id="Node000002" href="$classIRSensor.html#aced2f92e5001619c7859319ab485f014" title="Lê o valor do ADC a partir do arquivo." alt="" coords="239,5,383,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,15,225,15,225,21,191,21"/>
+<area shape="rect" id="Node000001" title="Executa a detecção contínua de obstáculos." alt="" coords="5,31,191,56"/>
+<area shape="rect" id="Node000002" href="$classIRSensor.html#aced2f92e5001619c7859319ab485f014" title="Lê o valor do ADC a partir do arquivo." alt="" coords="241,5,385,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,30,227,25,228,31,191,35"/>
+<area shape="rect" id="Node000003" href="$classIRSensor.html#a7dd2d48a5c545087591129b006042a3e" title="Envia os dados do sensor para o servidor via UDP." alt="" coords="239,55,388,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="191,51,225,55,225,60,190,56"/>
 </map>

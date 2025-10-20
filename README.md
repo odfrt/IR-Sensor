@@ -30,13 +30,29 @@ Feito isso, abra o seu terminal ou Powershell e execute o comando `ssh root@<ip 
 
 O segundo método permite também a transferência de arquivos via SCP. Para isso, novamente no terminal ou Powershell de seu computador, execute 
 ```
-scp -O IRSensor root@192.168.42.2:/
+scp -O IRSensor root@192.168.42.2:/root
 ```
 
 Agora, o executável estará localizado no diretório root da placa. 
 
 ### Execução
 
-Conecte o sensor à placa (Atente-se aos jumpers, não faça a conexão de forma errada!) e execute o programa digitando ``./IRSensor`` no terminal da placa. Caso não possua permissão para executar o programa, digite `chmod +x IRSensor`. Se tudo ocorrer de forma correta, o terminal deverá mostrar o seguinte:
+Conecte o sensor à placa (Atente-se aos jumpers, não faça a conexão de forma errada!) e execute o programa digitando ``./IRSensor <IP da máquina> <Porta>`` no terminal da placa. O IP deverá ser do computador que deseja usar para receber os dados. Caso não possua permissão para executar o programa, digite `chmod +x IRSensor`. Se tudo ocorrer de forma correta, o terminal deverá mostrar o seguinte:
 
-<img width="379" height="364" alt="Image" src="https://github.com/user-attachments/assets/8f3a4205-c5c7-4957-babe-96eca8f7d4d3" />
+<img width="284" height="286" alt="termin" src="https://github.com/user-attachments/assets/fb08d150-3043-4b72-867c-5ed4af776431" />
+
+### Transferência de dados para seu computador
+
+A partir do momento em que o programa começou a rodar, ele está buscando enviar os dados coletados para o endereço de IP e a porta escolhidos previamente. Para acessá-los em sua máquina Windows, podemos utilizar o Ncat, que pode ser obtido <a href="https://nmap.org/ncat/"> aqui.</a> Caso seja usuário de Linux, não é necessário fazer esse download. Após inicializado o programa na placa, abra o Powershell e digite:
+```
+ncat -u -l <Porta>
+```
+ou, no Terminal, digite:
+```
+nc -u -l <Porta>
+```
+Caso o IP e a porta estiverem corretos, os dados do sensor aparecerão, em tempo real, no seu computador, como pode ser visto a seguir:
+
+<img width="921" height="700" alt="transf dados" src="https://github.com/user-attachments/assets/f141b3eb-a86a-4a8e-a048-75747535ca85" />
+
+A janela da esquerda é o terminal da placa, aberto remotamente no Terminal, enquanto a janela da direita é o Powershell, recebendo os dados através do Ncat.

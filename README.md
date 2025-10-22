@@ -42,11 +42,11 @@ Conecte o sensor à placa (Atente-se aos jumpers, não faça a conexão de forma
 
 ### Transferência de dados para seu computador
 
-A partir do momento em que o programa começou a rodar, ele está buscando enviar os dados coletados para o endereço de IP e a porta escolhidos previamente. Para acessá-los em sua máquina Windows, podemos utilizar o Ncat, que pode ser obtido <a href="https://nmap.org/ncat/"> aqui.</a> Caso seja usuário de Linux, não é necessário fazer esse download. Após inicializado o programa na placa, abra o Powershell e digite:
+A partir do momento em que o programa começou a rodar, ele está buscando enviar os dados coletados para o endereço de IP e a porta escolhidos previamente. Para acessá-los em sua máquina Windows, podemos utilizar o Ncat, que pode ser obtido <a href="https://nmap.org/ncat/"> aqui.</a> Caso seja usuário de Linux, não é necessário fazer esse download. Após inicializado o programa na placa, abra o Powershell (para Windows) e digite:
 ```
 ncat -u -l <Porta>
 ```
-ou, no Terminal, digite:
+ou, no Terminal (para Linux), digite:
 ```
 nc -u -l <Porta>
 ```
@@ -54,4 +54,4 @@ Caso o IP e a porta estejam corretos, os dados do sensor aparecerão, em tempo r
 
 <img width="921" height="700" alt="transf dados" src="https://github.com/user-attachments/assets/f141b3eb-a86a-4a8e-a048-75747535ca85" />
 
-A janela da esquerda é o terminal da placa, aberto remotamente no Terminal, enquanto a janela da direita é o Powershell, recebendo os dados através do Ncat.
+A janela da esquerda é o terminal da placa, aberto remotamente pelo Terminal do computador, enquanto a janela da direita é o Powershell, recebendo os dados através do Ncat.

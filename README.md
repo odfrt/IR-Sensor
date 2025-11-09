@@ -54,4 +54,10 @@ Caso o IP e a porta estejam corretos, os dados do sensor aparecerão, em tempo r
 
 <img width="921" height="700" alt="transf dados" src="https://github.com/user-attachments/assets/f141b3eb-a86a-4a8e-a048-75747535ca85" />
 
-A janela da esquerda é o terminal da placa, aberto remotamente pelo Terminal do computador, enquanto a janela da direita é o Powershell, recebendo os dados através do Ncat.
+A janela da esquerda é o terminal da placa, aberto remotamente pelo Terminal do computador, enquanto a janela da direita é o Powershell, recebendo os dados através do Ncat. Os dados enviados via UDP são o valor do ADC e o estado do sensor (obstruído ou livre).
+
+### Interface gráfica
+
+Para facilitar a visualização do sensor, foi implementada uma interface visual em Python, utilizando PyQt. Basta executar _**sensor_interface.py**_, podendo ser necessária a instalação de bibliotecas, utilizando ``pip install PyQt5 pyqtgraph``. Feito isso, o usuário poderá ver a seguinte interface, que mostra os dados do sensor ao longo do tempo, permitindo salvá-los em um arquivo CSV, com timestamps de cada leitura. A interface recebe diretamente os dados do sensor enviados por UDP na porta 5000, que deverá ser a porta escolhida pelo usuário ao executar o código na placa.
+
+<img width="898" height="530" alt="interface" src="https://github.com/user-attachments/assets/04ba59ce-d87c-4307-b4a0-9a0f14ec7c53" />

@@ -110,7 +110,7 @@ public:
 
             sendData(value, status);
 
-            sleep(1);
+            usleep(300000);
         }
     }
 };

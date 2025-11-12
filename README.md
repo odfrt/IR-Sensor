@@ -61,3 +61,6 @@ A janela da esquerda é o terminal da placa, aberto remotamente pelo Terminal do
 Para facilitar a visualização do sensor, foi implementada uma interface visual em Python, utilizando PyQt. Basta executar _**sensor_interface.py**_, podendo ser necessária a instalação de bibliotecas, utilizando ``pip install PyQt5 pyqtgraph``. Feito isso, o usuário poderá ver a seguinte interface, que mostra os dados do sensor ao longo do tempo, permitindo salvá-los em um arquivo CSV, com timestamps de cada leitura. A interface recebe diretamente os dados do sensor enviados por UDP na porta 5000, que deverá ser a porta escolhida pelo usuário ao executar o código na placa.
 
 <img width="898" height="530" alt="interface" src="https://github.com/user-attachments/assets/04ba59ce-d87c-4307-b4a0-9a0f14ec7c53" />
+
+<img width="893" height="525" alt="interface2" src="https://github.com/user-attachments/assets/0cde1d9d-e9cf-4347-afee-d924c96e4a3c" />
+
